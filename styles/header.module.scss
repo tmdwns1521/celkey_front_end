@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  height: 6.5rem;
+  padding: 1rem 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #e5e5e5;
+  .logo {
+    display: block;
+    width: 10.5rem;
+    img {
+      width: 100%;
+    }
+  }
+  .buttons {
+    display: flex;
+    .login_btn, .join_btn {
+      display: flex;
+      align-items: center;
+      font-size: 1.4rem;
+      &:first-child {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
