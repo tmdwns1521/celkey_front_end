@@ -1,8 +1,9 @@
 import '../styles/reset.css';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import Login from "./page/Login.tsx";
-import Home from "./page/Home.tsx";
+import Login from "./page/login/Login.tsx";
+import Home from "./page/home/Home.tsx";
 import Header from "./components/Header.tsx";
+import KakaoCallback from "./page/auth/kakao/callback/KakaoCallback.tsx";
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/auth/kakao/callback" element={<KakaoCallback />}></Route>
         </Routes>
       </BrowserRouter>
     </>
