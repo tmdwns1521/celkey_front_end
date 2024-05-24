@@ -1,4 +1,4 @@
-import styles from "../../../styles/monthlySearch.module.scss";
+import styles from "../../../styles/keyword.module.scss";
 
 interface IKeywordMonthly {
   keyword: string;
@@ -16,13 +16,12 @@ interface Props {
 
 export default function MonthlySearch({KEYWORD_MONTHLY}: Props) {
   return (
-    <section>
+    <div className={styles.amount_wrap}>
       <h2 className="sub_title">월간 검색량</h2>
-      <div>
         {KEYWORD_MONTHLY.map((item) => {
           return (
             <ul key={item.keyword} className={styles.monthly_search_list}>
-              <li className={styles.search_total}>
+              <li className={styles.total}>
                 <p>{item.search_total.toLocaleString()}</p>
                 <div>TOTAL</div>
               </li>
@@ -39,8 +38,6 @@ export default function MonthlySearch({KEYWORD_MONTHLY}: Props) {
             </ul>
           )
         })}
-
-      </div>
-    </section>
+    </div>
   )
 }

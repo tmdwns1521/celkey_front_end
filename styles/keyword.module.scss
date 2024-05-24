@@ -41,30 +41,48 @@
       font-size: 1.8rem;
     }
   }
-  section {
+  .amount_section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+  .amount_wrap {
     padding: 0 1rem;
-    .keywords_wrap {
-      .keywords_box {
+    width: 100%;
+    .monthly_search_list, .monthly_doc_list {
+      display: flex;
+      overflow-x: scroll;
+      li {
+        width: 33.3333%;
         display: flex;
-        margin-top: 2rem;
-        h3 {
-          font-weight: 700;
-          margin-bottom: 2rem;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        background: #f2f2f2;
+        border-radius: 1rem;
+        margin-right: 1rem;
+        padding: 1.5rem 2rem;
+        text-align: center;
+        p {
+          font-size: 2rem;
+          margin: 1rem 0 0;
         }
-        .keywords {
-          margin-right: 5rem;
-          ul {
-            li {
-              margin-bottom: .5rem;
-            }
+        img {
+          width: 2.4rem;
+          margin-top: 1rem;
+        }
+        &.total {
+          background: #13C151;
+          color: #fff;
+          p {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-top: 1.5rem;
           }
-        }
-        .monthly {
-          margin-right: 5rem;
-          ul {
-            li {
-              margin-bottom: .5rem;
-            }
+          >div {
+            font-size: 2.5rem;
+            margin: 2.5rem 0 1rem;
           }
         }
       }
