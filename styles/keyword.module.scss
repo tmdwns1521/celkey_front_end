@@ -1,0 +1,73 @@
+.container {
+  padding-top: 4rem;
+  max-width: 96rem;
+  margin: 0 auto;
+  h1 {
+    margin: 2rem 0;
+    text-indent: 1.5rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  .search_word {
+    padding: 0 1rem;
+    margin-top: 4rem;
+    font-weight: 900;
+    p {
+      word-break: keep-all;
+      b {
+        position: relative;
+        font-size: 3.8rem;
+        padding: 0 2rem;
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 2.4rem;
+          height: 2.4rem;
+          background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.583 17.321C8.553 16.227 8 15 8 13.011C8 9.511 10.457 6.374 14.03 4.823L14.923 6.201C11.588 8.005 10.936 10.346 10.676 11.822C11.213 11.544 11.916 11.447 12.605 11.511C14.409 11.678 15.831 13.159 15.831 15C15.831 15.9283 15.4623 16.8185 14.8059 17.4749C14.1495 18.1312 13.2593 18.5 12.331 18.5C11.8177 18.4955 11.3103 18.389 10.8386 18.1866C10.3668 17.9841 9.93999 17.6899 9.583 17.321Z' fill='black'/%3E%3C/svg%3E%0A") no-repeat;
+        }
+        &:after {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 2.4rem;
+          height: 2.4rem;
+          background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14.417 6.679C15.447 7.773 16 9 16 10.989C16 14.489 13.544 17.626 9.97004 19.177L9.07704 17.799C12.412 15.995 13.064 13.654 13.325 12.178C12.788 12.456 12.085 12.553 11.395 12.489C9.59104 12.323 8.17004 10.842 8.17004 9C8.17004 8.07174 8.53879 7.1815 9.19517 6.52513C9.85155 5.86875 10.7418 5.5 11.67 5.5C12.743 5.5 13.77 5.99 14.418 6.679' fill='black'/%3E%3C/svg%3E%0A") no-repeat;
+        }
+      }
+      font-size: 1.8rem;
+    }
+  }
+  section {
+    padding: 0 1rem;
+    .keywords_wrap {
+      .keywords_box {
+        display: flex;
+        margin-top: 2rem;
+        h3 {
+          font-weight: 700;
+          margin-bottom: 2rem;
+        }
+        .keywords {
+          margin-right: 5rem;
+          ul {
+            li {
+              margin-bottom: .5rem;
+            }
+          }
+        }
+        .monthly {
+          margin-right: 5rem;
+          ul {
+            li {
+              margin-bottom: .5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
