@@ -1,0 +1,30 @@
+main {
+  max-width: 96rem;
+  margin: 0 auto;
+  h1 {
+    text-align: center;
+    margin-top: 10rem;
+    font-size: 2rem;
+    font-weight: 900;
+    word-break: keep-all;
+  }
+  .tab_wrap {
+    display: flex;
+    height: 5.5rem;
+    margin: 5rem 0 3rem;
+    div {
+      width: 50%;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f2f2f2;
+      cursor: pointer;
+      &.on {
+        background: #13C151;
+        color: #fff;
+        font-weight: 700;
+      }
+    }
+  }
+}

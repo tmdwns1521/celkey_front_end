@@ -1,26 +1,42 @@
 .container {
-  display: flex;
-  justify-content: space-between;
-  height: 6.5rem;
-  padding: 1rem 2rem;
-  margin-bottom: 1rem;
   border-bottom: 1px solid #e5e5e5;
-  .logo {
-    display: block;
-    width: 10.5rem;
-    img {
-      width: 100%;
-    }
-  }
-  .buttons {
+  .header_wrap {
+    max-width: 96rem;
+    margin: 0 auto;
     display: flex;
-    .login_btn, .join_btn {
+    justify-content: space-between;
+    height: 6.5rem;
+    padding: 1rem;
+    box-sizing: border-box;
+    .logo {
+      display: block;
+      max-width: 20rem;
+      img {
+        width: 100%;
+        display: block;
+        margin-top: 1.5rem;
+      }
+    }
+    .login_info {
       display: flex;
-      align-items: center;
-      font-size: 1.4rem;
-      &:first-child {
+      >div {
+        display: flex;
+        align-items: center;
         margin-right: 1rem;
+      }
+    }
+    .buttons {
+      display: flex;
+      .login_btn, .join_btn {
+        display: flex;
+        align-items: center;
+        font-size: 1.4rem;
+        word-break: keep-all;
+        &:first-child {
+          margin-right: 1rem;
+        }
       }
     }
   }
 }
+

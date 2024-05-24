@@ -1,16 +1,12 @@
 import styles from '../../../styles/login.module.scss';
-// import {api} from "../../api/api.ts";
+import api from "../../api/api.ts";
 
 export default function Login() {
 
-  // const test = async () => {
-  //   try {
-  //     const res = await api.get('/user/test');
-  //     console.log(res.status)
-  //   } catch (error) {
-  //     console.log(error.response.status, 'Error')
-  //   }
-  // }
+  const test = async () => {
+    const res = await api.get('/user/test')
+    console.log(res)
+  }
 
   return (
     <div className={styles.container}>
@@ -20,7 +16,7 @@ export default function Login() {
           <img src="../../../public/image/kakao_login_btn.png" alt="카카오 로그인"/>
         </a>
         <button className={styles.naver_login}
-                // onClick={test}
+                onClick={test}
         >
           <img src="../../../public/image/naver_login_btn.png" alt="네이버 로그인"/>
         </button>
