@@ -1,6 +1,7 @@
 import SearchBar from "../../../components/SearchBar.tsx";
 import styles from '../../../../styles/keyword.module.scss';
 import MonthlySearch from "../../../components/keywords/monthlySearch.tsx";
+import {useEffect, useState} from "react";
 
 export default function SearchKeyword() {
   const KEYWORD_MONTHLY = [{
@@ -11,6 +12,9 @@ export default function SearchKeyword() {
     publishing_blog: 19400,
     publishing_cafe: 21300,
     publishing_total: 40900,
+    competition_blog: 70,
+    competition_cafe: 20,
+    competition_total: 90,
   }];
   // const RELATED_KEYWORD = [
   //   {
@@ -27,6 +31,32 @@ export default function SearchKeyword() {
   //   },
   // ]
 
+  const [animateData, setAnimateData] = useState(
+    KEYWORD_MONTHLY.map(item => ({
+      ...item,
+      competition_blog: 0,
+      competition_cafe: 0,
+      competition_total: 0,
+    }))
+  );
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAnimateData(KEYWORD_MONTHLY);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [KEYWORD_MONTHLY]);
+
+  const [textColor, setTextColor] = useState(styles.transparent);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTextColor(styles.on);
+    }, 3000);
+
+    return () => clearTimeout(timer); // 컴포넌트가 언마운트될 때 타이머 제거
+  }, []);
+
   return (
     <div className={styles.container}>
       {/*<h1>키워드 분석</h1>*/}
@@ -35,9 +65,69 @@ export default function SearchKeyword() {
         <p><b>{KEYWORD_MONTHLY[0].keyword}</b> 키워드를 분석했어요!</p>
       </div>
 
-      <section className={styles.amount_section}>
+        {/* 경쟁 강도 분석 */}
+        <div className={styles.competition_wrap}>
+          <h2 className="sub_title">키워드 경쟁 강도</h2>
+          {animateData.map((item) => {
+            return (
+              <div>
+                <div className={styles.competition_bar_wrap}>
+                  <span>TOTAL</span>
+                  <div className={styles.bar_wrap}>
+                    <div style={{width: `${item.competition_total}%`}} className={styles.total_bar}></div>
+                    <div className={`${styles.percentage_num} ${textColor}`}>
+                      {item.competition_total <= 40 ? '약 '
+                      : item.competition_total <= 70 ? '보통 ' : '강 '
+                      }
+                      ({item.competition_total}%)
+                    </div>
+                  </div>
+                  <div className={styles.percentage}>
+                    <span>0</span>
+                    <span>100</span>
+                  </div>
+                </div>
+
+                <div className={styles.competition_bar_wrap}>
+                  <span>Blog</span>
+                  <div className={styles.bar_wrap}>
+                    <div style={{width: `${item.competition_blog}%`}} className={styles.total_bar}></div>
+                    <div className={`${styles.percentage_num} ${textColor}`}>
+                      {item.competition_blog <= 40 ? '약 '
+                        : item.competition_blog <= 70 ? '보통 ' : '강 '
+                      } ({item.competition_blog}%)
+                    </div>
+                  </div>
+                  <div className={styles.percentage}>
+                    <span>0</span>
+                    <span>100</span>
+                  </div>
+                </div>
+
+                <div className={styles.competition_bar_wrap}>
+                  <span>Cafe</span>
+                  <div className={styles.bar_wrap}>
+                    <div style={{width: `${item.competition_cafe}%`}} className={styles.total_bar}></div>
+                    <div className={`${styles.percentage_num} ${textColor}`}>
+                      {item.competition_cafe <= 40 ? '약 '
+                        : item.competition_cafe <= 70 ? '보통 ' : '강 '
+                      } ({item.competition_cafe}%)
+                    </div>
+                  </div>
+                  <div className={styles.percentage}>
+                    <span>0</span>
+                    <span>100</span>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+        {/* 월간 검색량 분석 */}
         <MonthlySearch KEYWORD_MONTHLY={KEYWORD_MONTHLY}/>
 
+        {/* 월간 문서 발행량 분석 */}
         <div className={styles.amount_wrap}>
           <h2 className="sub_title">월간 문서 발행량</h2>
           {KEYWORD_MONTHLY.map((item) => {
@@ -61,7 +151,6 @@ export default function SearchKeyword() {
             )
           })}
         </div>
-      </section>
 
       {/*<section>*/}
       {/*  <div className={`${styles.keywords_wrap} content_wrap`}>*/}
