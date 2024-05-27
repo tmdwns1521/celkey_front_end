@@ -3,18 +3,26 @@ import {Link} from "react-router-dom";
 import useUserInfoStore from "../../store/useUserInfoStore.ts";
 import api from "../api/api.ts";
 import { useNavigate } from 'react-router-dom';
+import {clearUserInfo} from "../../store/util.ts";
 
 export default function Header() {
-  const { userInfo, setUserInfo } = useUserInfoStore();
+  const { userInfo } = useUserInfoStore();
   const navigate = useNavigate();
 
-  console.log(userInfo);
-
-  const handleLogout = () => {
-    //
-    setUserInfo(null);
-    api.defaults.headers.common['Authorization'] = '';
-    navigate('/login');
+  const handleLogout = async () => {
+    try {
+      if(userInfo !== null && userInfo !== undefined) {
+        const res = await api.post('/auth/logout');
+        console.log('LOGOUT', res)
+        clearUserInfo();
+        delete api.defaults.headers.common['Authorization'];
+        navigate('/login');
+      } else {
+        console.error('logout Error');
+      }
+    } catch(e) {
+      console.error('Error logging out:', e);
+    }
   }
 
   return (
@@ -26,7 +34,7 @@ export default function Header() {
         {userInfo ? (
           <div className={styles.login_info}>
             <div>{userInfo.email}</div>
-            <button onClick={handleLogout}>로그아웃</button>
+            <button onClick={handleLogout} className={styles.logout}>로그아웃</button>
           </div>
         ) : (
           <div className={styles.buttons}>

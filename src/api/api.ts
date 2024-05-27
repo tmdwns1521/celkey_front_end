@@ -1,7 +1,5 @@
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
-import base64 from "base-64";
-import useUserInfoStore from "../../store/useUserInfoStore.ts";
+import {clearUserInfo, setUserInfoFromToken} from "../../store/util.ts";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -27,11 +25,14 @@ const api = axios.create({
 //   error => Promise.reject(error)
 // );
 
+const isLoggedIn = () => {
+  const accessToken = api.defaults.headers.common['Authorization'];
+  return accessToken !== null && accessToken !== undefined;
+}
+
 // 응답 인터셉터
 api.interceptors.response.use(
-  response => {
-    return response
-  },
+  response => response,
   async error => {
     const originalRequest = error.config;
 
@@ -39,26 +40,22 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const res = await api.get('/auth/kakao/refresh-token', { withCredentials: true });
-        const newAccessToken = `Bearer ${res.data.accessToken}`;
-        console.log(newAccessToken)
+        if(isLoggedIn()) {
+          const res = await api.get('/auth/kakao/refresh-token', { withCredentials: true });
+          const newAccessToken = `Bearer ${res.data.accessToken}`;
 
-        api.defaults.headers.common['Authorization'] = newAccessToken;
-        originalRequest.headers['Authorization'] = newAccessToken;
+          api.defaults.headers.common['Authorization'] = newAccessToken;
+          originalRequest.headers['Authorization'] = newAccessToken;
 
-        const payload = newAccessToken.split('.')[1];
-        let decodingInfo = base64.decode(payload);
-        let userInfo = JSON.parse(decodingInfo);
-        console.log(userInfo)
+          setUserInfoFromToken(newAccessToken);
+          return api(originalRequest);
+        } else {
+          clearUserInfo();
+        }
 
-        const setUserInfo = useUserInfoStore.getState().setUserInfo;
-        setUserInfo(userInfo);
-
-        return api(originalRequest);
       } catch (err) {
-        const navigate = useNavigate();
-        console.error('Refresh token error', err);
-        navigate('/login')
+        clearUserInfo();
+        return Promise.reject(err);
       }
     }
 

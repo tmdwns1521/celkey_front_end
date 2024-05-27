@@ -1,39 +1,34 @@
 import '../styles/reset.css';
 import '../styles/common.scss';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import base64 from "base-64";
 import Header from "./components/Header.tsx";
 import Home from "./page/home/Home.tsx";
 import Login from "./page/login/Login.tsx";
-import KakaoCallback from "./page/auth/kakao/callback/KakaoCallback.tsx";
+import KakaoCallback from "./components/KakaoCallback.tsx";
 import SearchKeyword from "./page/search/keyword/keyword.tsx";
-import useUserInfoStore from "../store/useUserInfoStore.ts";
 import {useEffect} from "react";
 import api from "./api/api.ts";
+import {clearUserInfo, setUserInfoFromToken} from "../store/util.ts";
 
 function App() {
-  const setUserInfo = useUserInfoStore(state => state.setUserInfo);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
         const res = await api.get<any>('/auth/kakao/refresh-token', { withCredentials: true });
-        console.log(res)
+        console.log('AccessToken', res.data);
         const newAccessToken = `Bearer ${res.data.accessToken}`;
         api.defaults.headers.common['Authorization'] = newAccessToken;
 
-        const payload = newAccessToken.split('.')[1];
-        const decodingInfo = base64.decode(payload);
-        const userInfo = JSON.parse(decodingInfo);
-        setUserInfo(userInfo);
+        setUserInfoFromToken(newAccessToken);
 
       } catch (error) {
         console.error('Error refreshing token:', error);
-        setUserInfo(null);
+        clearUserInfo();
       }
     }
     fetchUserInfo();
-  }, [setUserInfo])
+  }, [])
 
   return (
     <>

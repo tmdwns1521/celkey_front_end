@@ -1,0 +1,47 @@
+// 경쟁 강도 분석
+.competition_wrap {
+  padding: 0 1rem;
+  .competition_bar_wrap {
+    >span {
+      display: block;
+      margin: 1rem 0;
+    }
+    .bar_wrap {
+      position: relative;
+      width: 100%;
+      border: 1px dashed #13C151;
+      border-radius: 1.5rem;
+      .total_bar {
+        width: 0%;
+        height: 3rem;
+        background: #13C151;
+        border-radius: 1.5rem;
+        transition: width 2.5s ease-in-out;
+      }
+      .percentage_num {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: transparent;
+        font-weight: 900;
+        font-size: 1.4rem;
+        transition: color .5s ease-in;
+        &.on {
+          color: #474747;
+        }
+      }
+    }
+    .percentage {
+      width: 98%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      span {
+        color: #9d9d9d;
+        font-size: 1rem;
+        margin-top: .5rem;
+      }
+    }
+  }
+}

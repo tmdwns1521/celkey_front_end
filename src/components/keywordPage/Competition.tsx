@@ -1,4 +1,4 @@
-import styles from "../../../styles/keyword.module.scss";
+import styles from "../../../styles/competition.module.scss";
 import {useEffect, useState} from "react";
 import CompetitionBar from "./CompetitionBar.tsx";
 

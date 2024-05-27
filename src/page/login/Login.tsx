@@ -1,5 +1,16 @@
 import styles from '../../../styles/login.module.scss';
 import api from "../../api/api.ts";
+import {InputHTMLAttributes} from "react";
+
+const passwordProps: InputHTMLAttributes<HTMLInputElement> = {
+  type: 'password',
+  autoComplete: 'current-password'
+};
+
+const usernameProps: InputHTMLAttributes<HTMLInputElement> = {
+  type: 'text',
+  autoComplete: 'username'
+};
 
 export default function Login() {
 
@@ -27,11 +38,11 @@ export default function Login() {
         <form className={styles.email_login_form}>
           <div className={styles.email_box}>
             <label htmlFor="">이메일 주소</label>
-            <input type="text"/>
+            <input type="text" {...usernameProps} />
           </div>
           <div className={styles.password_box}>
             <label htmlFor="">비밀번호</label>
-            <input type="password"/>
+            <input type="password" {...passwordProps} />
           </div>
         </form>
       </div>

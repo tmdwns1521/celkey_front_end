@@ -1,4 +1,4 @@
-import styles from "../../../styles/keyword.module.scss";
+import styles from "../../../styles/competition.module.scss";
 
 interface ICompetition {
   label: string;
