@@ -37,10 +37,7 @@ export default function Header() {
             <button onClick={handleLogout} className={styles.logout}>로그아웃</button>
           </div>
         ) : (
-          <div className={styles.buttons}>
-            <Link to="/login" className={styles.login_btn}>로그인</Link>
-            <Link to="/join" className={styles.join_btn}>가입하기</Link>
-          </div>
+          <Link to="/login" className={styles.login_btn}>로그인</Link>
         )}
       </div>
     </div>

@@ -16,14 +16,13 @@ function App() {
     const fetchUserInfo = async () => {
       try {
         const res = await api.get<any>('/auth/kakao/refresh-token', { withCredentials: true });
-        console.log('AccessToken', res.data);
         const newAccessToken = `Bearer ${res.data.accessToken}`;
         api.defaults.headers.common['Authorization'] = newAccessToken;
 
         setUserInfoFromToken(newAccessToken);
 
       } catch (error) {
-        console.error('Error refreshing token:', error);
+        // console.error('Error refreshing token:', error);
         clearUserInfo();
       }
     }
